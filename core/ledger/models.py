@@ -5,7 +5,7 @@ Base = declarative_base()
 
 
 class LedgerEntry(Base):
-    __tablename__ = 'ledger_entries'
+    __tablename__ = "ledger_entries"
 
     id = Column(Integer, primary_key=True)
     operation = Column(String, nullable=False)

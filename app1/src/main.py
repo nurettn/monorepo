@@ -8,9 +8,11 @@ from core.database import get_db
 app = FastAPI()
 service = LedgerService()
 
+
 @app.post("/ledger")
 def create_entry(entry: LedgerEntryCreate, db: Session = Depends(get_db)):
     return service.create_entry(db, entry)
+
 
 @app.get("/ledger/{owner_id}")
 def get_balance(owner_id: str, db: Session = Depends(get_db)):

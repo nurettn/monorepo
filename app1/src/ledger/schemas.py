@@ -1,13 +1,15 @@
-from core.ledger.schemas import BaseLedgerEntryCreate, BaseLedgerOperation
+from enum import Enum
+
+from core.ledger.schemas import BaseLedgerEntryCreate, CoreLedgerOperation
 
 
-class LedgerOperation(BaseLedgerOperation):
-    DAILY_REWARD = "DAILY_REWARD"
-    SIGNUP_CREDIT = "SIGNUP_CREDIT"
-    CREDIT_SPEND = "CREDIT_SPEND"
-    CREDIT_ADD = "CREDIT_ADD"
+class LedgerOperation(Enum):
+    DAILY_REWARD = CoreLedgerOperation.DAILY_REWARD.value
+    SIGNUP_CREDIT = CoreLedgerOperation.SIGNUP_CREDIT.value
+    CREDIT_SPEND = CoreLedgerOperation.CREDIT_SPEND.value
+    CREDIT_ADD = CoreLedgerOperation.CREDIT_ADD.value
 
-    # app specific
+    # App-specific
     CONTENT_CREATION = "CONTENT_CREATION"
     CONTENT_ACCESS = "CONTENT_ACCESS"
 

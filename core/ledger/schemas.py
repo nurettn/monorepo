@@ -7,16 +7,16 @@ from pydantic import BaseModel
 class LedgerOpMeta(enum.EnumMeta):
     def __init__(cls, name, bases, namespace):
         super().__init__(name, bases, namespace)
-        if cls.__name__ != "BaseLedgerOperation":
-            required = set(BaseLedgerOperation.__members__)
-            current = set(cls.__members__)
-            missing = required - current
+        required_ops = namespace.get("_required_operations")
+        if required_ops is not None:
+            missing = set(required_ops) - set(cls.__members__)
             if missing:
-                raise TypeError(
-                    f"{cls.__name__} missing required operations: {', '.join(sorted(missing))}"
-                )
+                raise TypeError(f"Missing required operations: {', '.join(missing)}")
 
-class BaseLedgerOperation(enum.Enum, metaclass=LedgerOpMeta):
+
+class CoreLedgerOperation(enum.Enum, metaclass=LedgerOpMeta):
+    _required_operations = {"DAILY_REWARD", "SIGNUP_CREDIT", "CREDIT_SPEND", "CREDIT_ADD"}
+
     DAILY_REWARD = "DAILY_REWARD"
     SIGNUP_CREDIT = "SIGNUP_CREDIT"
     CREDIT_SPEND = "CREDIT_SPEND"

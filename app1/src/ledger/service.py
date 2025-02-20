@@ -9,7 +9,7 @@ LEDGER_CONFIG = {
     LedgerOperation.CREDIT_SPEND.value: -1,
     LedgerOperation.CREDIT_ADD.value: 10,
     LedgerOperation.CONTENT_CREATION.value: -5,
-    LedgerOperation.CONTENT_ACCESS.value: 0
+    LedgerOperation.CONTENT_ACCESS.value: 0,
 }
 
 
@@ -22,9 +22,9 @@ class LedgerService:
         if db.query(LedgerEntry).filter_by(nonce=entry.nonce).first():
             raise ValueError("Duplicate nonce")
 
-        if LEDGER_CONFIG[entry.operation.value] < 0:
+        if LEDGER_CONFIG[entry.operation] < 0:
             balance = self.get_balance(db, entry.owner_id)
-            if balance + LEDGER_CONFIG[entry.operation.value] < 0:
+            if balance + LEDGER_CONFIG[entry.operation] < 0:
                 raise ValueError("Insufficient balance")
 
         db_entry = LedgerEntry(**entry.dict())
