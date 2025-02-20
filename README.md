@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 3. Create .env file
 ```bash
-cp .env.example .env
+cp .env-example .env
 ```
 
 4. Create a PostgreSQL database:
