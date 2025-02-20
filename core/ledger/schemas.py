@@ -1,7 +1,7 @@
 import enum
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class LedgerOpMeta(enum.EnumMeta):
@@ -29,3 +29,5 @@ class BaseLedgerEntryCreate(BaseModel):
     nonce: str
     owner_id: str
     created_on: datetime
+
+    model_config = ConfigDict(extra="forbid")

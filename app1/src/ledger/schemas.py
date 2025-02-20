@@ -1,5 +1,7 @@
 from enum import Enum
 
+from pydantic import ConfigDict
+
 from core.ledger.schemas import BaseLedgerEntryCreate, CoreLedgerOperation
 
 
@@ -17,5 +19,4 @@ class LedgerOperation(Enum):
 class LedgerEntryCreate(BaseLedgerEntryCreate):
     operation: LedgerOperation
 
-    class Config:
-        use_enum_values = True
+    model_config = ConfigDict(use_enum_values=True)
