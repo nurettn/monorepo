@@ -49,6 +49,21 @@ alembic upgrade head
 ```bash
 uvicorn app1.src.main:app --reload
 ```
+7. Example requests:
+```bash 
+curl --location 'http://127.0.0.1:8000/ledger/owner_456'
+```
+```bash 
+curl --location 'http://127.0.0.1:8000/ledger' \
+--header 'Content-Type: application/json' \
+--data '{
+  "operation": "DAILY_REWARD",
+  "amount": 100,
+  "nonce": "unique_nonce_126",
+  "owner_id": "owner_456",
+  "created_on": "2023-10-01T12:00:00"
+}'
+```
 
 
 ### Features
