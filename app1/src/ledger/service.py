@@ -27,7 +27,7 @@ class LedgerService:
             if balance + LEDGER_CONFIG[entry.operation] < 0:
                 raise ValueError("Insufficient balance")
 
-        db_entry = LedgerEntry(**entry.dict())
+        db_entry = LedgerEntry(**entry.model_dump())
         db.add(db_entry)
         db.commit()
         db.refresh(db_entry)
