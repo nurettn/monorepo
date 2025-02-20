@@ -1,4 +1,4 @@
-from fastapi import Depends, FastAPI
+from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 
 from app1.src.ledger.schemas import LedgerEntryCreate
@@ -10,8 +10,11 @@ service = LedgerService()
 
 
 @app.post("/ledger")
-def create_entry(entry: LedgerEntryCreate, db: Session = Depends(get_db)):
-    return service.create_entry(db, entry)
+async def create_entry(entry: LedgerEntryCreate, db: Session = Depends(get_db)):
+    try:
+        return service.create_entry(db, entry)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 
 @app.get("/ledger/{owner_id}")

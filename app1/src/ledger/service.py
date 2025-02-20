@@ -22,9 +22,10 @@ class LedgerService:
         if db.query(LedgerEntry).filter_by(nonce=entry.nonce).first():
             raise ValueError("Duplicate nonce")
 
-        if LEDGER_CONFIG[entry.operation] < 0:
+        operation_value = LEDGER_CONFIG[entry.operation]
+        if operation_value < 0:
             balance = self.get_balance(db, entry.owner_id)
-            if balance + LEDGER_CONFIG[entry.operation] < 0:
+            if balance + operation_value < 0:
                 raise ValueError("Insufficient balance")
 
         db_entry = LedgerEntry(**entry.model_dump())
