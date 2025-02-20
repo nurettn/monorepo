@@ -7,3 +7,6 @@ psycopg2-binary
 pytest
 httpx
 python-dotenv==1.0.1
+black==25.1.0
+isort==6.0.0
+ruff==0.9.7

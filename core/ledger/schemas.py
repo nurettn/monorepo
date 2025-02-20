@@ -15,7 +15,12 @@ class LedgerOpMeta(enum.EnumMeta):
 
 
 class CoreLedgerOperation(enum.Enum, metaclass=LedgerOpMeta):
-    _required_operations = {"DAILY_REWARD", "SIGNUP_CREDIT", "CREDIT_SPEND", "CREDIT_ADD"}
+    _required_operations = {
+        "DAILY_REWARD",
+        "SIGNUP_CREDIT",
+        "CREDIT_SPEND",
+        "CREDIT_ADD",
+    }
 
     DAILY_REWARD = "DAILY_REWARD"
     SIGNUP_CREDIT = "SIGNUP_CREDIT"

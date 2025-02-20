@@ -64,7 +64,7 @@ uvicorn app1.src.main:app --reload
 ```bash
 docker run --name test_db -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_DB=test_db -p 5432:5432 -d postgres
 ```
-Run tests using pytest:
+2. Run tests using pytest:
 ```bash
 pytest tests/test_ledger.py -v
 ```
